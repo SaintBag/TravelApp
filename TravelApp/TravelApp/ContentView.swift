@@ -11,23 +11,7 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                ScrollView(.horizontal, showsIndicators: false) {
-                    Spacer()
-                    HStack(spacing: 8) {
-                        ForEach(0..<15, id: \.self) { num in
-                            VStack(spacing: 8) {
-                                Spacer()
-                                    .frame(width: 50, height: 50)
-                                    .background(Color(.orange))
-                                    .cornerRadius(.infinity)
-                                    .shadow(color: .gray, radius: 5)
-                                Text("CLICK")
-                                    .font(.system(size: 12, weight: .semibold))
-                            }
-                           
-                        }
-                    }.padding(.horizontal)
-                }
+                AhojCategoriesView()
             }.navigationTitle("Discover AHOJ!")
         }
     }
@@ -36,5 +20,27 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+    }
+}
+
+struct AhojCategoriesView: View {
+    var body: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            Spacer()
+            HStack(spacing: 8) {
+                ForEach(0..<15, id: \.self) { num in
+                    VStack(spacing: 8) {
+                        Spacer()
+                            .frame(width: 50, height: 50)
+                            .background(Color(.orange))
+                            .cornerRadius(.infinity)
+                            .shadow(color: .gray, radius: 5)
+                        Text("CLICK")
+                            .font(.system(size: 12, weight: .semibold))
+                    }
+                    
+                }
+            }.padding(.horizontal)
+        }
     }
 }
