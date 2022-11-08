@@ -9,13 +9,27 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        NavigationStack {
+            ScrollView {
+                ScrollView(.horizontal, showsIndicators: false) {
+                    Spacer()
+                    HStack(spacing: 8) {
+                        ForEach(0..<15, id: \.self) { num in
+                            VStack(spacing: 8) {
+                                Spacer()
+                                    .frame(width: 50, height: 50)
+                                    .background(Color(.orange))
+                                    .cornerRadius(.infinity)
+                                    .shadow(color: .gray, radius: 5)
+                                Text("CLICK")
+                                    .font(.system(size: 12, weight: .semibold))
+                            }
+                           
+                        }
+                    }.padding(.horizontal)
+                }
+            }.navigationTitle("Discover AHOJ!")
         }
-        .padding()
     }
 }
 
