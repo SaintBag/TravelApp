@@ -11,7 +11,7 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                AhojCategoriesView()
+                EventsCategoriesView()
                 RecomendedPlacesView()
                 RecomendedRestaurantsView()
                 ExtraView()
@@ -26,21 +26,42 @@ struct ContentView_Previews: PreviewProvider {
     }
 }
 
-struct AhojCategoriesView: View {
+struct EventsCategories: Hashable {
+    let name: String
+    let imageName: String
+}
+
+struct EventsCategoriesView: View {
+    
+    let eventsCategories: [EventsCategories] = [
+        .init(name: "Art", imageName: "paintpalette.fill"),
+        .init(name: "Sport", imageName: "sportscourt.fill"),
+        .init(name: "Live Events", imageName: "guitars.fill"),
+        .init(name: "Food", imageName: "takeoutbag.and.cup.and.straw.fill"),
+        .init(name: "History", imageName: "books.vertical.fill")
+
+        
+    ]
+    
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             Spacer()
-            HStack(spacing: 16) {
-                ForEach(0..<7, id: \.self) { num in
+            HStack(alignment: .top, spacing: 16) {
+                ForEach(eventsCategories, id: \.self) { eventCategory in
                     VStack(spacing: 16) {
-                        Spacer()
-                            .frame(width: 80, height: 80)
+//                        Spacer()
+                        Image(systemName: eventCategory.imageName)
+                            .font(.system(size: 24))
+                            .foregroundColor(.white)
+                            .frame(width: 68, height: 68)
                             .background(Color(.orange))
                             .cornerRadius(.infinity)
                             .shadow(color: .gray, radius: 6)
-                        Text("CLICK")
+                        Text(eventCategory.name)
                             .font(.system(size: 12, weight: .semibold))
-                    }
+                            .multilineTextAlignment(.center)
+                            
+                    }.frame(width: 68)
                     
                 }
             }.padding(.horizontal)
@@ -124,9 +145,9 @@ struct ExtraView: View {
                 HStack(spacing: 16) {
                     ForEach(0..<4, id: \.self) { num in
                         Spacer()
-                            .frame(width: 80, height: 80)
+                            .frame(width: 68, height: 68)
                             .background(Color(.green))
-                            .cornerRadius(15)
+                            .cornerRadius(.infinity)
                             .shadow(color: .gray, radius: 6)
                             .padding(.bottom)
                     }
