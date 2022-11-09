@@ -8,14 +8,46 @@
 import SwiftUI
 
 struct ContentView: View {
+    init() {
+        UINavigationBar.appearance().largeTitleTextAttributes = [
+            .foregroundColor: UIColor.white
+        ]
+    }
     var body: some View {
         NavigationStack {
-            ScrollView {
-                EventsCategoriesView()
-                RecomendedPlacesView()
-                RecomendedRestaurantsView()
-                ExtraView()
-            }.navigationTitle("Discover AHOJ!")
+            
+            ZStack {
+                LinearGradient(gradient: Gradient(colors: [Color.green, Color.mint]), startPoint: .trailing, endPoint: .topLeading)
+                    .ignoresSafeArea()
+                Color.white
+                    .offset(y: 400)
+                
+                ScrollView {
+                    HStack {
+                        Image(systemName: "magnifyingglass")
+                        Text("Quo Vadis? SearchBar place")
+                        Spacer()
+                            
+                    }.font(.system(size: 18, weight: .semibold))
+                        .padding(8)
+                        .foregroundColor(.white)
+                        .padding(.vertical)
+                        .background(Color(.init(white: 1, alpha: 0.2)))
+                        .cornerRadius(16)
+                        .padding(16)
+                        
+                    
+                    EventsCategoriesView()
+                    
+                    VStack {
+                        RecomendedPlacesView()
+                        RecomendedRestaurantsView()
+                        ExtraView()
+                    }.background(Color.white)
+                        .cornerRadius(18)
+                        .padding(.top, 24)
+                }.padding(.top, 24)
+            }.navigationTitle("AHOJ!")
         }
     }
 }
@@ -46,20 +78,22 @@ struct EventsCategoriesView: View {
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             Spacer()
-            HStack(alignment: .top, spacing: 16) {
+            HStack(alignment: .top, spacing: 20) {
                 ForEach(eventsCategories, id: \.self) { eventCategory in
-                    VStack(spacing: 16) {
+                    VStack(alignment: .center, spacing: 16) {
                         
                         Image(systemName: eventCategory.imageName)
                             .font(.system(size: 24))
-                            .foregroundColor(.white)
+                            .foregroundColor(.mint)
                             .frame(width: 68, height: 68)
-                            .background(Color(.orange))
+                            .background(Color(.white))
                             .cornerRadius(.infinity)
                             .shadow(color: .gray, radius: 6)
                         Text(eventCategory.name)
-                            .font(.system(size: 12, weight: .semibold))
+                            .font(.system(size: 20, weight: .semibold))
+                            .foregroundColor(Color.white)
                             .multilineTextAlignment(.center)
+                            
                         
                     }.frame(width: 68)
                     
@@ -114,9 +148,9 @@ struct RecomendedPlacesView: View {
                                 .padding(.horizontal, 12)
                                 .padding(.bottom, 6)
                         }
-                        .background(Color(.init(white: 1, alpha: 0.85)))
+                        .background(Color.white)
                         .cornerRadius(15)
-                        .shadow(color: .gray, radius: 6)
+                        .shadow(color: .init(.sRGB, white: 0.8, opacity: 1.0), radius: 6)
                         .padding(.bottom)
                     }
                 }.padding(.horizontal)
@@ -200,7 +234,7 @@ struct RecomendedRestaurantsView: View {
                         .frame(width: 350)
                         .background(Color(.init(white: 1, alpha: 0.85)))
                         .cornerRadius(15)
-                        .shadow(color: .gray, radius: 6)
+                        .shadow(color: .init(.sRGB, white: 0.8, opacity: 1.0), radius: 6)
                         .padding(.bottom)
                     }
                 }.padding(.horizontal)
@@ -250,7 +284,7 @@ struct ExtraView: View {
                                 .multilineTextAlignment(.center)
                             
                         }.frame(width: 68)
-                         .shadow(color: .gray, radius: 6)
+                         .shadow(color: .init(.sRGB, white: 0.8, opacity: 1.0), radius: 6)
                          
                     }
                 }.padding(.horizontal)
