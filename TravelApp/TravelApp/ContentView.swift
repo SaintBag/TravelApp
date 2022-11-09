@@ -49,7 +49,7 @@ struct EventsCategoriesView: View {
             HStack(alignment: .top, spacing: 16) {
                 ForEach(eventsCategories, id: \.self) { eventCategory in
                     VStack(spacing: 16) {
-                        //                        Spacer()
+                        
                         Image(systemName: eventCategory.imageName)
                             .font(.system(size: 24))
                             .foregroundColor(.white)
@@ -77,7 +77,7 @@ struct RecommendedPlaces: Hashable {
 struct RecomendedPlacesView: View {
     let recommendedPlaces: [RecommendedPlaces] = [
         .init(placeName: "Cracow", countryName: "Poland", imageName: "one"),
-        .init(placeName: "Berlin", countryName: "Germany", imageName: "two"),
+        .init(placeName: "Berlin", countryName: "Germany", imageName: "travel"),
         .init(placeName: "Paris", countryName: "France", imageName: "three")
     ]
     
@@ -107,7 +107,7 @@ struct RecomendedPlacesView: View {
                             Text(place.placeName.uppercased())
                                 .font(.system(size: 16, weight: .semibold))
                                 .padding(.horizontal, 12)
-                                
+                            
                             Text(place.countryName.uppercased())
                                 .font(.system(size: 16, weight: .semibold))
                                 .foregroundColor(Color(.darkGray))
@@ -127,27 +127,81 @@ struct RecomendedPlacesView: View {
     }
 }
 
+struct Restaurants: Hashable {
+    let restaurantName: String
+    let restaurantImage: String
+    let restaurantType: String
+    let place: String
+    //    let destination: RecommendedPlaces
+}
+
 struct RecomendedRestaurantsView: View {
+    let restaurants: [Restaurants] = [
+        .init(restaurantName: "Tempura Bar", restaurantImage: "tempura", restaurantType: "Japanese", place: "Cracow, Poland"),
+        .init(restaurantName: "Baldon", restaurantImage: "fool", restaurantType: "Italian", place: "Berlin, Germany"),
+        .init(restaurantName: "FigTruck", restaurantImage: "figa", restaurantType: "Street Food", place: "Siena, Italy")
+    ]
     var body: some View {
         VStack {
             HStack {
                 Text("Recommended Restaurants")
                     .font(.system(size: 16, weight: .semibold))
                 Spacer()
-                Text("See all")
-                    .font(.system(size: 16, weight: .semibold))
+                
+                Button(action: {
+                    
+                }, label: {
+                    Text("See all")
+                        .foregroundColor(Color(.label))
+                })
+                .font(.system(size: 16, weight: .semibold))
             }.padding(.horizontal)
                 .padding(.top)
+            
             ScrollView(.horizontal, showsIndicators: false) {
                 Spacer()
                 HStack(spacing: 8) {
-                    ForEach(0..<4, id: \.self) { num in
-                        Spacer()
-                            .frame(width: 200, height: 100)
-                            .background(Color(.blue))
-                            .cornerRadius(15)
-                            .shadow(color: .gray, radius: 6)
-                            .padding(.bottom)
+                    ForEach(restaurants.shuffled(), id: \.self) { restaurant in
+                        HStack(spacing: 8.0) {
+                            Spacer()
+                            Image(restaurant.restaurantImage)
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 80, height: 80)
+                                .clipped()
+                                .cornerRadius(4)
+                                .padding(.leading, 6)
+                                .padding(.vertical, 6)
+                            Spacer()
+                            
+                            VStack(alignment: .leading) {
+                                HStack {
+                                    Text(restaurant.restaurantName)
+                                    Spacer()
+                                    Button {
+                                        
+                                    } label: {
+                                        Image(systemName: "ellipsis")
+                                            .foregroundColor(.gray)
+                                    }
+                                }
+                                
+                                HStack {
+                                    Image(systemName: "star.fill")
+                                    Text("4.5 • \(restaurant.restaurantType) • $$")
+                                    
+                                }
+                                Text(restaurant.place)
+                                
+                            }.font(.system(size: 16, weight: .semibold))
+                            
+                            Spacer()
+                        }
+                        .frame(width: 350)
+                        .background(Color(.init(white: 1, alpha: 0.85)))
+                        .cornerRadius(15)
+                        .shadow(color: .gray, radius: 6)
+                        .padding(.bottom)
                     }
                 }.padding(.horizontal)
                 
@@ -157,7 +211,16 @@ struct RecomendedRestaurantsView: View {
     }
 }
 
+struct Extracts: Hashable {
+    let name: String
+    let imageName: String
+}
+
 struct ExtraView: View {
+    let extracts: [Extracts] = [
+        .init(name: "STH ONE", imageName: "person.fill"),
+        .init(name: "STH TWO", imageName: "person")
+    ]
     var body: some View {
         VStack {
             HStack {
@@ -168,21 +231,31 @@ struct ExtraView: View {
                     .font(.system(size: 16, weight: .semibold))
             }.padding(.horizontal)
                 .padding(.top)
+            
             ScrollView(.horizontal, showsIndicators: false) {
                 Spacer()
-                HStack(spacing: 16) {
-                    ForEach(0..<4, id: \.self) { num in
-                        Spacer()
-                            .frame(width: 68, height: 68)
-                            .background(Color(.green))
-                            .cornerRadius(.infinity)
-                            .shadow(color: .gray, radius: 6)
-                            .padding(.bottom)
+                HStack(alignment: .top, spacing: 16) {
+                    ForEach(extracts.shuffled(), id: \.self) { extract in
+                        VStack(alignment: .center) {
+                            Image(systemName: extract.imageName)
+                                .resizable()
+                                .scaledToFill()
+                                .foregroundColor(.white)
+                                .frame(width: 68, height: 68)
+                                .background(Color(.orange))
+                                .cornerRadius(.infinity)
+                                
+                            Text(extract.name)
+                                .font(.system(size: 12, weight: .semibold))
+                                .multilineTextAlignment(.center)
+                            
+                        }.frame(width: 68)
+                         .shadow(color: .gray, radius: 6)
+                         
                     }
                 }.padding(.horizontal)
-                
             }
-            
         }
     }
 }
+
