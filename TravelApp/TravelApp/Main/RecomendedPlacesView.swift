@@ -46,9 +46,7 @@ struct RecomendedPlacesView: View {
                                 .padding(.horizontal, 12)
                                 .padding(.bottom, 6)
                         }
-                        .background(Color.white)
-                        .cornerRadius(15)
-                        .shadow(color: .init(.sRGB, white: 0.8, opacity: 1.0), radius: 6)
+                        .viewCustomization()
                         .padding(.bottom)
                     }
                 }.padding(.horizontal)
@@ -56,7 +54,6 @@ struct RecomendedPlacesView: View {
         }
     }
 }
-
 
 struct RecomendedPlacesView_Previews: PreviewProvider {
     static var previews: some View {

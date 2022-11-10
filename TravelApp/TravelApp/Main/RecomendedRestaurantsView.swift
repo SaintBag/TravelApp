@@ -68,9 +68,7 @@ struct RecomendedRestaurantsView: View {
                             Spacer()
                         }
                         .frame(width: 350)
-                        .background(Color(.init(white: 1, alpha: 0.85)))
-                        .cornerRadius(15)
-                        .shadow(color: .init(.sRGB, white: 0.8, opacity: 1.0), radius: 6)
+                        .viewCustomization()
                         .padding(.bottom)
                     }
                 }.padding(.horizontal)

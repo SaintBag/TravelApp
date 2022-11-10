@@ -19,7 +19,7 @@ struct MainView: View {
             ZStack {
                 LinearGradient(gradient: Gradient(colors: [Color.green, Color.mint]), startPoint: .trailing, endPoint: .topLeading)
                     .ignoresSafeArea()
-                Color.white
+                Color.mainViewBackground 
                     .offset(y: 400)
                 
                 ScrollView {
@@ -35,12 +35,12 @@ struct MainView: View {
                         .background(Color(.init(white: 1, alpha: 0.2)))
                         .cornerRadius(16)
                         .padding(16)
-                    EventsCategoriesView()
+                    EventsCategoriesView() 
                     VStack {
                         RecomendedPlacesView()
                         RecomendedRestaurantsView()
                         ExtraView()
-                    }.background(Color.white)
+                    }.background(Color.mainViewBackground)
                         .cornerRadius(18)
                         .padding(.top, 24)
                 }
