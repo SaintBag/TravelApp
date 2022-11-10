@@ -19,38 +19,66 @@ struct EventsCategoriesView: View {
     
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
-//            Spacer()
             HStack(alignment: .top, spacing: 20) {
                 ForEach(eventsCategories, id: \.self) { eventCategory in
-                    VStack(alignment: .center, spacing: 16) {
-                        
-                        Image(systemName: eventCategory.imageName)
-                            .font(.system(size: 24))
-                            .foregroundColor(.mint)
-                            .frame(width: 68, height: 68)
-                            .background(Color(.white))
-                            .cornerRadius(.infinity)
-                            .shadow(color: .gray, radius: 6)
-                        Text(eventCategory.name)
-                            .font(.system(size: 20, weight: .semibold))
-                            .foregroundColor(Color.white)
-                            .multilineTextAlignment(.center)
-                        
-                    }.frame(width: 68)
+                    NavigationLink(
+                        destination: EventsCategoriesDetailsView(),
+                        label: {
+                            VStack(spacing: 12) {
+                            
+                                Image(systemName: eventCategory.imageName)
+                                    .font(.system(size: 24))
+                                    .foregroundColor(.mint)
+                                    .frame(width: 68, height: 68)
+                                    .background(Color(.white))
+                                    .cornerRadius(.infinity)
+                                    .shadow(color: .gray, radius: 6)
+                                Text(eventCategory.name)
+                                    .font(.system(size: 20, weight: .semibold))
+                                    .foregroundColor(Color.white)
+                                    .multilineTextAlignment(.center)
+                            
+                            }.frame(width: 68)
+                        })
                 }
             }.padding(.horizontal)
         }
     }
 }
 
+struct EventsCategoriesDetailsView: View {
+    var body: some View {
+        ScrollView {
+            ForEach(0..<4, id: \.self) { num in
+                VStack(alignment: .center ,spacing: 0) {
+                    Image("one")
+                        .resizable()
+                        .scaledToFill()
+                    Text("SMACZNEJ KAWUSI ŻYCZĘ TOBIE")
+                        .font(.system(size: 16, weight: .semibold))
+                        .padding()
+                        
+                }.viewCustomization()
+                    .padding()
+            }
+           
+            
+        }.navigationBarTitle("Event Category", displayMode: .inline)
+    }
+}
 
 struct EventsCategoriesView_Previews: PreviewProvider {
     static var previews: some View {
-        ZStack {
-            Color.mint
-            EventsCategoriesView()
+        NavigationView {
+            EventsCategoriesDetailsView()
+            
         }
         
-        MainView()
-    }
-}
+//                ZStack {
+//                    Color.mint
+//                    EventsCategoriesView()
+//                }
+        
+                MainView()
+            }
+        }
